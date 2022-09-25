@@ -37,7 +37,7 @@ const Users = () => {
           </thead>
           <tbody>
             {users.map((user) => (
-              <tr>
+              <tr key={user._id}>
                 <td>{user.name}</td>
                 <td>
                   {user.qualities.map((qualitie) => (
