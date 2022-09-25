@@ -4,7 +4,7 @@ import api from '../api'
 const Users = () => {
   const [users, setUsers] = useState(api.users.fetchAll())
   const handleDelete = (userId) => {
-    setUsers((prevState) => prevState.filter((i) => i._id !== userId))
+    setUsers((prevState) => prevState.filter((user) => user._id !== userId))
   }
 
   const renderPhrase = (number) => {
@@ -36,23 +36,26 @@ const Users = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((i) => (
+            {users.map((user) => (
               <tr>
-                <td>{i.name}</td>
+                <td>{user.name}</td>
                 <td>
-                  {i.qualities.map((qualitie) => (
-                    <span className={`badge bg-${qualitie.color} m-1`}>
+                  {user.qualities.map((qualitie) => (
+                    <span
+                      className={`badge bg-${qualitie.color} m-1`}
+                      key={qualitie._id}
+                    >
                       {qualitie.name}
                     </span>
                   ))}
                 </td>
-                <td>{i.profession.name}</td>
-                <td>{i.completedMeetings}</td>
-                <td>{i.rate}/5</td>
+                <td>{user.profession.name}</td>
+                <td>{user.completedMeetings}</td>
+                <td>{user.rate}/5</td>
                 <td>
                   <button
                     className="btn btn-danger"
-                    onClick={() => handleDelete(i._id)}
+                    onClick={() => handleDelete(user._id)}
                   >
                     delete
                   </button>
